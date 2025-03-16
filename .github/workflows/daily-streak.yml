@@ -1,0 +1,30 @@
+name: Daily Commit
+
+# Trigger the workflow daily at 00:00 UTC
+on:
+  schedule:
+    - cron: '34 17 * * *'  # Runs every day at 17:34 UTC
+  workflow_dispatch:  # Allows manual triggering if needed
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Step 2: Update the file with the current date
+    - name: Update daily file
+      run: |
+        echo "# Last updated: $(date)" > README.md
+
+    # Step 3: Commit and push the changes
+    - name: Commit changes
+      run: |
+        git config --global user.name 'GitHub Actions Bot'
+        git config --global user.email 'actions-bot@users.noreply.github.com'
+        git add README.md
+        git commit -m "Daily update: $(date)"
+        git push
