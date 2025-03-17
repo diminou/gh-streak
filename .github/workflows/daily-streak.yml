@@ -25,8 +25,8 @@ jobs:
     # Step 3: Commit and push the changes
     - name: Commit changes
       run: |
-        git config --global user.name 'Dmitry Ivanov (but automated)'
-        git config --global user.email 'actions-bot@users.noreply.github.com'
+        git config --global user.name 'diminou'
+        git config --global user.email 'dmitry.ivanov.ev@gmail.com'
         git add README.md
         git commit -m "Daily update: $(date)"
         git push
